@@ -1,6 +1,6 @@
 # openvpn-aws
 ## Introduction
-The aim of this project is to automatize the process of creating a OpenVPN server on a public cloud VM.
+The aim of this project is to automatize the process of creating a OpenVPN server on a AWS.
 The provided script is capable of providing the functionalities of a VPN, deploying the server and generating a profile to be imported in OpenVPN client
 ## Getting started
 ### AWS
