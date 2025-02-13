@@ -27,3 +27,8 @@ https://openvpn.net/connect-docs/import-profile.html
 ./cleanup.sh "AWS-REGION"
 ```
 
+
+### References
+https://medium.com/@zhongli_69231/setting-up-an-openvpn-service-on-aws-and-azure-vms-using-docker-compose-f13f7a7edb3c
+
+
