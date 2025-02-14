@@ -8,6 +8,8 @@ https://github.com/lucamiano/openvpn-aws.git
 
 **Prerequisites:**
 
+Install OpenVpn: (https://openvpn.net/community-resources/installing-openvpn/)
+
 Install AWS CLI: (https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 Generate Access and Secret Key for IAM User: (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
@@ -22,9 +24,11 @@ Run aws configure: (https://docs.aws.amazon.com/cli/latest/userguide/getting-sta
 **Import the generated profile to OpenVPN**:
 https://openvpn.net/connect-docs/import-profile.html
 
-**[Optional]: Cleanup resources:**
+**[Optional]: Cleanup resources** 
+
+The script deletes most recent AMI, SG and Keypair associated with the instance, finally deletes local keypair:
 ```bash
-./cleanup.sh "AWS-REGION"
+sudo ./cleanup.sh "AWS-REGION"
 ```
 
 
