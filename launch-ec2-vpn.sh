@@ -160,7 +160,7 @@ EOF
 ssh -o StrictHostKeyChecking=no -i "$KEY_NAME.pem" ubuntu@$PUBLIC_IP << 'EOF'
 export PASSPHRASE="abcde12345"
 cd ~/openvpn-docker
-sudo apt install expect -y
+sudo apt-get install expect -y
 expect <<EOL
 spawn docker-compose run -tt --rm openvpn ovpn_initpki
 set timeout -1

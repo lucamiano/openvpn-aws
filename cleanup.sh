@@ -11,16 +11,21 @@ REGION=$1  # Accept region as a parameter
 KEY_NAME="ec2-vpn-keypair-$REGION"
 SECURITY_GROUP_NAME="OpenVPN-SG-$REGION"
 
-# Check if EC2 instance exists (using instance ID)
-INSTANCE_ID=$(aws ec2 describe-instances --region "$REGION" --query "Reservations[0].Instances[0].InstanceId" --output text)
-if [ "$INSTANCE_ID" != "None" ]; then
-  echo "Terminating EC2 instance with ID: $INSTANCE_ID"
+# Get the most recently launched instance that is not terminated
+INSTANCE_ID=$(aws ec2 describe-instances --region "$REGION" \
+  --query "Reservations[].Instances[?State.Name!='terminated'] | sort_by(@, &LaunchTime)[-1].InstanceId" --output text)
+
+if [ "$INSTANCE_ID" != "None" ] && [ -n "$INSTANCE_ID" ]; then
+  echo "Terminating the most recently launched EC2 instance: $INSTANCE_ID"
+
+  # Terminate the instance
   aws ec2 terminate-instances --region "$REGION" --instance-ids "$INSTANCE_ID"
+
   # Wait for termination
   aws ec2 wait instance-terminated --region "$REGION" --instance-ids "$INSTANCE_ID"
   echo "EC2 instance $INSTANCE_ID terminated."
 else
-  echo "No EC2 instance found to terminate."
+  echo "No active EC2 instances found to terminate."
 fi
 
 # Check if the Security Group exists
