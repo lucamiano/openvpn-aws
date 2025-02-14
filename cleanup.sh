@@ -13,7 +13,8 @@ SECURITY_GROUP_NAME="OpenVPN-SG-$REGION"
 
 # Get the most recently launched instance that is not terminated
 INSTANCE_ID=$(aws ec2 describe-instances --region "$REGION" \
-  --query "Reservations[].Instances[?State.Name!='terminated'] | sort_by(@, &LaunchTime)[-1].InstanceId" --output text)
+  --query "Reservations[].Instances[?State.Name!='terminated'] | [] | sort_by(@, &LaunchTime)[-1].InstanceId" \
+  --output text)
 
 if [ "$INSTANCE_ID" != "None" ] && [ -n "$INSTANCE_ID" ]; then
   echo "Terminating the most recently launched EC2 instance: $INSTANCE_ID"

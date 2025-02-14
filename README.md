@@ -22,6 +22,9 @@ Run aws configure: (https://docs.aws.amazon.com/cli/latest/userguide/getting-sta
 ./launch-ec2-vpn.sh "AWS-REGION"
 ```
 **Import the generated profile to OpenVPN**:
+s
+A file name openvpn-client.ovpn is generated in root project folder
+
 https://openvpn.net/connect-docs/import-profile.html
 
 **[Optional]: Cleanup resources** 
